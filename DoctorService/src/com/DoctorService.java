@@ -18,7 +18,7 @@ import com.google.gson.JsonParser;
 import model.Doctor;
 
 @Path("/Doctors")
-@DeclareRoles(value = {"admin","doctor","patient" })
+@DeclareRoles(value = {"admin","doctor","patient" })//kjnnk
 public class DoctorService {
 	
 	Doctor doc = new Doctor();
