@@ -6,10 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 
-public class Doctor {//udara cha
+public class Doctor {
 	
 	String output="";
 	
