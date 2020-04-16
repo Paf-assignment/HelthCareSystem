@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -128,17 +129,17 @@ public class DoctorService {
 	
 	@GET
 	@Path("/searchDoc/{dName}")
-	@Consumes(MediaType.APPLICATION_JSON)
+	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String searchDoc(String docData)
+	public String searchDoc(@PathParam("dName") String docData)
 	{
-		JsonObject jsonObject = new JsonParser().parse(docData).getAsJsonObject();
+		//JsonObject jsonObject = new JsonParser().parse(docData).getAsJsonObject();
 		
-		String id = jsonObject.get("dName").getAsString();
+		//String id = jsonObject.get("dName").getAsString();
 		
-		String output = doc.searchDoctors(id);
+		//String output = doc.searchDoctors(id);
 		
-		return output;
+		return doc.searchDoctors(docData);
 	}
 	
 }
