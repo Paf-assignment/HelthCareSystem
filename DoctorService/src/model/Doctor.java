@@ -9,7 +9,7 @@ import java.sql.Statement;
 import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 
-public class Doctor {
+public class Doctor {//udara
 	
 	String output="";
 	
