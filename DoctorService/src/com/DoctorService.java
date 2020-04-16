@@ -1,8 +1,9 @@
 package com;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -11,16 +12,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jsoup.Jsoup;
-import org.jsoup.parser.Parser;
-
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import model.Doctor;
 
 @Path("/Doctors")
+@DeclareRoles(value = {"admin","doctor","patient" })
 public class DoctorService {
 	
 	Doctor doc = new Doctor();
@@ -44,6 +42,7 @@ public class DoctorService {
 	
 	@POST
 	@Path("/")
+	@RolesAllowed(value = { "admin","doctor"})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addDoctor(String docData)
@@ -73,6 +72,7 @@ public class DoctorService {
 	
 	@PUT
 	@Path("/")
+	@RolesAllowed(value = { "admin","doctor" })
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateDoctor(String docData)
@@ -114,6 +114,7 @@ public class DoctorService {
 	
 	@DELETE
 	@Path("/")
+	@RolesAllowed(value = { "admin","doctor"})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteDoctor(String docData)
@@ -129,15 +130,10 @@ public class DoctorService {
 	
 	@GET
 	@Path("/searchDoc/{dName}")
-	//@Consumes(MediaType.APPLICATION_JSON)
+	@RolesAllowed(value = { "admin","patient"})
 	@Produces(MediaType.TEXT_PLAIN)
 	public String searchDoc(@PathParam("dName") String docData)
 	{
-		//JsonObject jsonObject = new JsonParser().parse(docData).getAsJsonObject();
-		
-		//String id = jsonObject.get("dName").getAsString();
-		
-		//String output = doc.searchDoctors(id);
 		
 		return doc.searchDoctors(docData);
 	}
