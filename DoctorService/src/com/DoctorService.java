@@ -23,9 +23,9 @@ public class DoctorService {
 	
 	Doctor doc = new Doctor();
 	
+	@RolesAllowed("admin")
 	@POST
 	@Path("/")
-	@RolesAllowed({ "admin","doctor"})
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addDoctor(String docData)
@@ -44,9 +44,9 @@ public class DoctorService {
 		return output;
 	}
 	
+	@RolesAllowed({ "admin","patient" })
 	@GET
 	@Path("/readDoctors")
-	@RolesAllowed({ "admin","patient" })
 	@Produces(MediaType.TEXT_HTML)
 	public String readDoctors()
 	{
@@ -54,9 +54,9 @@ public class DoctorService {
 	}
 
 	
+	@RolesAllowed({ "admin","doctor" })
 	@PUT
 	@Path("/")
-	@RolesAllowed({ "admin","doctor" })
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateDoctor(String docData)
@@ -96,9 +96,9 @@ public class DoctorService {
 	**/
 	
 	
+	@RolesAllowed("admin")
 	@DELETE
 	@Path("/")
-	@RolesAllowed("admin")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteDoctor(String docData)
@@ -112,9 +112,9 @@ public class DoctorService {
 		return output;
 	}
 	
+	@RolesAllowed("admin")
 	@GET
 	@Path("/searchDoc/{dName}")
-	@RolesAllowed({ "admin","patient"})
 	@Produces(MediaType.TEXT_PLAIN)
 	public String searchDoc(@PathParam("dName") String docData)
 	{

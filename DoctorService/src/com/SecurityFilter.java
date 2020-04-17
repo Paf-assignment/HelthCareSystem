@@ -85,7 +85,6 @@ public class SecurityFilter implements ContainerRequestFilter {
 
 					if (rolesSet.contains("patient")) {
 						webTarget = client.target("http://localhost:8080/AuthService/AuthService").path("users/patient");
-
 					} else if (rolesSet.contains("doctor")) {
 						webTarget = client.target("http://localhost:8080/AuthService/AuthService").path("users/doctor");
 					} else if (rolesSet.contains("admin")) {
