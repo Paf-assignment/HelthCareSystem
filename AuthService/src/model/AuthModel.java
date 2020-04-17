@@ -16,7 +16,6 @@ import beans.UserBean;
 
 import javax.ws.rs.core.Response.Status;
 
-//import util.DBConnection;
 
 public class AuthModel {
 	

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Set;
 import javax.ws.rs.core.UriBuilder;
 
-//import util.DBConnection;
+
 
 public class AuthUser {
 	
