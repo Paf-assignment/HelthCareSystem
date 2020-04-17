@@ -39,7 +39,7 @@ public class appointments {
 			}
 
 			// create a prepared statement
-			String query = " insert into appointment (`Aid`,`date`,`time`,`checkeddStatus`,`doctorid`,`patientid`)"
+			String query = " insert into appointment (`Aid`,`date`,`time`,`checkeddStatus`,`doctorid`,`patientnic`)"
 					+ " values (?, ?, ?, ?, ?,?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
@@ -48,7 +48,7 @@ public class appointments {
 			preparedStmt.setString(3, time);
 			preparedStmt.setString(4, status);
 			preparedStmt.setInt(5, Integer.parseInt(doctor));
-			preparedStmt.setInt(6, Integer.parseInt(patient));
+			preparedStmt.setString(6, patient);
 
 			// execute the statement
 			preparedStmt.execute();
@@ -82,7 +82,7 @@ public class appointments {
 
 			// Prepare the html table to be displayed
 			output = "<table  class=\"table\" border=\"1\"><tr><th>Appointment ID</th>"
-					+ "<th>date</th><th>Time</th>" + "<th>status</th><th>doctor</th><th>patient</th>"
+					+ "<th>date</th><th>Time</th>" + "<th>status</th><th>doctor</th><th>patientnic</th>"
 					+ "<th>Update</th><th>Remove</th></tr>";
 			String query = "select * from appointment";
 			Statement stmt = con.createStatement();
@@ -94,7 +94,7 @@ public class appointments {
 				String time = rs.getString("time");
 				String status = rs.getString("checkeddStatus");
 				String doctor = rs.getString("doctorid");
-				String patient = rs.getString("patientid");
+				String patient = rs.getString("patientnic");
 				// Add into the html table
 				output += "<tr><td>" + aid + "</td>";
 				output += "<td>" + date + "</td>";
@@ -124,8 +124,8 @@ public class appointments {
 		return output;
 	}
 	
-	/*
-	public String updateAppointment(String Aid, String date, String time , String doctorid, String patientid ) {
+	
+	public String updateAppointment(String Aid, String date, String time , String doctorid, String 	patientnic ) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -133,15 +133,14 @@ public class appointments {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
-			String query = "UPDATE appointment SET date=?,time=?,doctorid=?,patientid    WHERE Aid=?";
+			String query = "UPDATE appointment SET date=?,time=?,doctorid=?,patientnic=?    WHERE Aid=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, date);
 			preparedStmt.setString(2, time);
-			
 			preparedStmt.setString(4, doctorid);
-			preparedStmt.setInt(5, Integer.parseInt(patientid));
-			preparedStmt.setInt(6,  Integer.parseInt(patientid));
+			preparedStmt.setInt(5, Integer.parseInt(patientnic));
+			preparedStmt.setInt(6,  Integer.parseInt(Aid));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -152,7 +151,37 @@ public class appointments {
 		}
 		return output;
 	}
-	*/
+	
+	
+	public String cancelAppointments(String Aid) {
+		String output = "";
+
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting the database for deleting";
+			}
+
+			// create a prepared statement
+			String query = "delete from appointment where Aid=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setInt(1, Integer.parseInt(Aid));
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Deleted successfully";
+
+		} catch (Exception e) {
+			output = "Error while deleting the item ";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+
+	}
+	
+	
 	
 
 }
