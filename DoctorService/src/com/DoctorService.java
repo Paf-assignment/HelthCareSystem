@@ -23,23 +23,6 @@ public class DoctorService {
 	
 	Doctor doc = new Doctor();
 	
-/**	@POST
-	@Path("/")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String addDocs(@FormParam("dName") String name,
-						  @FormParam("dSpecialization") String specialization,
-						  @FormParam("dAddress") String address,
-						  @FormParam("dEmail") String email,
-						  @FormParam("dFee") String fee,
-						  @FormParam("dWHospital") String wHospital)
-	{
-		//String id, String name, String specialization, String address, String email, String fee, String wHospital
-		String output = doc.addDoctors(name, specialization, address, email, fee, wHospital);
-		return output;
-	}
-	**/
-	
 	@POST
 	@Path("/")
 	@RolesAllowed({ "admin","doctor"})
