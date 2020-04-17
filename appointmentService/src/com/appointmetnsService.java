@@ -48,8 +48,10 @@ public class appointmetnsService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String makeAppointment(@FormParam("date") String date, @FormParam("time") String time,
-			@FormParam("doctor") String doctor, @FormParam("patient") String patient) {
+	public String makeAppointment(@FormParam("date") String date,
+			@FormParam("time") String time,
+			@FormParam("doctor") String doctor, 
+			@FormParam("patient") String patient) {
 		String output = appointment.makeAppointment(date, time, doctor, patient);
 		return output;
 	}
@@ -65,11 +67,11 @@ public class appointmetnsService {
 		// Convert the input string to a JSON object
 		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
 		// Read the values from the JSON object
-		String Aid = itemObject.get("itemID").getAsString();
-		String date = itemObject.get("itemCode").getAsString();
-		String time = itemObject.get("itemName").getAsString();
-		String doctorid = itemObject.get("itemPrice").getAsString();
-		String patientnic = itemObject.get("itemDesc").getAsString();
+		String Aid = itemObject.get("Aid").getAsString();
+		String date = itemObject.get("date").getAsString();
+		String time = itemObject.get("time").getAsString();
+		String doctorid = itemObject.get("doctorid").getAsString();
+		String patientnic = itemObject.get("patientnic").getAsString();
 		
 		String output = appointment.updateAppointment(Aid, date, time, doctorid, patientnic);
 		return output;
@@ -84,8 +86,8 @@ public class appointmetnsService {
 	public String cancelAppointment(String Aid) {
 		// Convert the input string to an XML document
 		Document doc = Jsoup.parse(Aid, "", Parser.xmlParser());
-		// Read the value from the element <itemID>
-		String appID = doc.select("itemID").text();
+		// Read the value from the element <aid>
+		String appID = doc.select("aid").text();
 		String output = appointment.cancelAppointments(appID);
 		return output;
 	}

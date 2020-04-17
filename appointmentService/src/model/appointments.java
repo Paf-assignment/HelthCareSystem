@@ -117,7 +117,7 @@ public class appointments {
 			output += "</table>";
 
 		} catch (Exception e) {
-			output = "Error while reading the items.";
+			output = "Error while View the Appointment.";
 			System.err.println(e.getMessage());
 		}
 
@@ -138,15 +138,15 @@ public class appointments {
 			// binding values
 			preparedStmt.setString(1, date);
 			preparedStmt.setString(2, time);
-			preparedStmt.setString(4, doctorid);
-			preparedStmt.setInt(5, Integer.parseInt(patientnic));
-			preparedStmt.setInt(6,  Integer.parseInt(Aid));
+			preparedStmt.setString(3, doctorid);
+			preparedStmt.setString(4,patientnic);
+			preparedStmt.setInt(5,Integer.parseInt(Aid));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
 			output = "Updated successfully";
 		} catch (Exception e) {
-			output = "Error while updating the item.";
+			output = "Error while updating the Appointment";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -173,7 +173,7 @@ public class appointments {
 			output = "Deleted successfully";
 
 		} catch (Exception e) {
-			output = "Error while deleting the item ";
+			output = "Error while cancelling the Appointment ";
 			System.err.println(e.getMessage());
 		}
 
