@@ -1,9 +1,9 @@
 package com;
 
 import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 
-//import javax.annotation.security.PermitAll;
-//import javax.annotation.security.RolesAllowed;
 //For REST Service
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -31,7 +31,8 @@ public class appointmetnsService {
 	
 	appointments appointment = new appointments();
 	
-	//@RolesAllowed("admin")
+	
+	@RolesAllowed({ "admin","doctor"})
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -40,7 +41,7 @@ public class appointmetnsService {
 	}
 	
 	
-	
+	@RolesAllowed({ "admin","patient"})
 	@POST
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -69,7 +70,7 @@ public class appointmetnsService {
 	
 	
 	//update appointment
-	//@RolesAllowed({ "admin","patient" })
+	@RolesAllowed("admin")
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -105,11 +106,12 @@ public class appointmetnsService {
 	}
 	 */
 	
+	@RolesAllowed({ "admin","patient" })
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteDoctor(String docData)
+	public String cancelAppointments(String docData)
 	{
 		JsonObject jsonObject = new JsonParser().parse(docData).getAsJsonObject();
 		
@@ -119,6 +121,20 @@ public class appointmetnsService {
 		
 		return output;
 	}
+	
+	
+	
+	@RolesAllowed({ "admin","doctor" })
+	@GET
+	@Path("/searchApp/{NIC}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String searchDoc(@PathParam("NIC") String appData)
+	{
+		
+		return appointment.searchAppointments(appData);
+		
+	}
+	
 	
 	
 	
