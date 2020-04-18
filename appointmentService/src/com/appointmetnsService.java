@@ -1,11 +1,9 @@
 package com;
 
+import javax.annotation.security.RolesAllowed;
+
 //import javax.annotation.security.PermitAll;
 //import javax.annotation.security.RolesAllowed;
-
-
-import javax.ws.rs.Path;
-
 //For REST Service
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -33,6 +31,7 @@ public class appointmetnsService {
 	
 	appointments appointment = new appointments();
 	
+	//@RolesAllowed("admin")
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -42,23 +41,35 @@ public class appointmetnsService {
 	
 	
 	
-	
-	//make appointment 
 	@POST
-	@Path("/")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/add")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String makeAppointment(@FormParam("date") String date,
-			@FormParam("time") String time,
-			@FormParam("doctor") String doctor, 
-			@FormParam("patient") String patient) {
+	public String addDoctor(String docData)
+	{
+		JsonObject docObject = new JsonParser().parse(docData).getAsJsonObject();
+		
+		String date = docObject.get("date").getAsString();
+		String time = docObject.get("time").getAsString();
+		String doctor = docObject.get("doctor").getAsString();
+		String patient = docObject.get("patient").getAsString();
+		
+		
 		String output = appointment.makeAppointment(date, time, doctor, patient);
+		
 		return output;
 	}
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	//update appointment
+	//@RolesAllowed({ "admin","patient" })
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -77,8 +88,9 @@ public class appointmetnsService {
 		return output;
 	}
 
-	
+	/*
 	//Cancel appointment
+	//@RolesAllowed({ "admin","patient" })
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -91,7 +103,22 @@ public class appointmetnsService {
 		String output = appointment.cancelAppointments(appID);
 		return output;
 	}
-
+	 */
+	
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteDoctor(String docData)
+	{
+		JsonObject jsonObject = new JsonParser().parse(docData).getAsJsonObject();
+		
+		String appID = jsonObject.get("appID").getAsString();
+		
+		String output = appointment.cancelAppointments(appID);
+		
+		return output;
+	}
 	
 	
 	
