@@ -224,7 +224,7 @@ String output="";
 
 			String query = "SELECT * FROM hospital WHERE hospitalName LIKE ?";
 			PreparedStatement prepareStatement = con.prepareStatement(query);
-			prepareStatement.setString(1,searchText);
+			prepareStatement.setString(1,searchText);//binding values
 			
 			ResultSet set = prepareStatement.executeQuery();
 			
