@@ -218,7 +218,7 @@ public class Payment {
 	
 	
 	
-	/*	
+	
 	public String searchPayment(String searchText) {
 		
 		System.out.println(searchText);
@@ -275,7 +275,7 @@ public class Payment {
 		return output;	
 		
 	}
-	*/
+	
 	
 	
 }

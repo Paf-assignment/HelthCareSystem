@@ -1,6 +1,8 @@
 package com;
 
-
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 
 import javax.annotation.security.RolesAllowed;
 //For REST Service
@@ -30,6 +32,7 @@ public class PaymentServices {
 	Payment pay = new Payment();
 	
 	
+	@RolesAllowed({ "admin","patient" })
 	@GET
 	@Path("/readPayment")
 	@Produces(MediaType.TEXT_HTML)
@@ -40,7 +43,7 @@ public class PaymentServices {
 	
 	
 	
-	
+	@RolesAllowed({ "admin","patient" })
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +64,7 @@ public class PaymentServices {
 	}
 	
 	
+	@RolesAllowed("admin")
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +85,7 @@ public class PaymentServices {
 		
 	}
 	
-	
+	@RolesAllowed("admin")
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -98,8 +102,7 @@ public class PaymentServices {
 	}
 	
 	
-	/*
-	 *
+	
 	@RolesAllowed("admin")
 	@GET
 	@Path("/searchPay/{nic}")
@@ -107,9 +110,9 @@ public class PaymentServices {
 	public String searchPay(@PathParam("nic") String payData)
 	{
 		
-		return pay.searchPayments(payData);
+		return pay.searchPayment(payData);
 	}
-	*/
+	
 	
 	//com
 	
