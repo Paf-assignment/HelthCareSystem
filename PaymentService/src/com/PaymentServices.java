@@ -18,6 +18,7 @@ import org.jsoup.nodes.Document;
 import model.Payment;
 
 @Path("/payments")
+@PermitAll
 public class PaymentServices {
 	/*
 	@GET
