@@ -246,6 +246,37 @@ public String searchAppointments(String searchText) {
 		return output;	
 		
 	}
+
+
+
+public String ConfirmAppointment(String Aid) {
+	String output = "";
+	String msg="Confirmed";
+	try {
+		Connection con = connect();
+		if (con == null) {
+			return "Error while connecting to the database for updating.";
+		}
+		// create a prepared statement
+		String query = "UPDATE appointment SET checkeddStatus=?    WHERE Aid=?";
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+		// binding values
+		preparedStmt.setString(1, msg);
+		preparedStmt.setString(2, Aid);
+
+		// execute the statement
+		preparedStmt.execute();
+		con.close();
+		output = "appointment confirmed successfully";
+	} catch (Exception e) {
+		output = "Error while confirm  the Appointment";
+		System.err.println(e.getMessage());
+	}
+	return output;
+}
+
+
+
 	
 	
 	

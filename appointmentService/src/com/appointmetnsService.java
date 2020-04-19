@@ -69,15 +69,19 @@ public class appointmetnsService {
 	
 	
 	
+	
+	
+	
+	
 	//update appointment
 	@RolesAllowed("admin")
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String updateAppointment(String itemData) {
+	public String updateAppointment(String appData) {
 		// Convert the input string to a JSON object
-		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
+		JsonObject itemObject = new JsonParser().parse(appData).getAsJsonObject();
 		// Read the values from the JSON object
 		String Aid = itemObject.get("Aid").getAsString();
 		String date = itemObject.get("date").getAsString();
@@ -86,6 +90,25 @@ public class appointmetnsService {
 		String patientnic = itemObject.get("patientnic").getAsString();
 		
 		String output = appointment.updateAppointment(Aid, date, time, doctorid, patientnic);
+		return output;
+	}
+	
+	
+	
+	
+	//Confirm appointment
+	@RolesAllowed("admin")
+	@PUT
+	@Path("/confirmAp")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String ConfirmAppointment(String appData) {
+		// Convert the input string to a JSON object
+		JsonObject itemObject = new JsonParser().parse(appData).getAsJsonObject();
+		// Read the values from the JSON object
+		String Aid = itemObject.get("Aid").getAsString();
+		
+		String output = appointment.ConfirmAppointment(Aid);
 		return output;
 	}
 
