@@ -150,7 +150,7 @@ public class Payment {
 				return "Error while connecting to the database";
 			}
 			
-			String query = "delete from doctors where ID =?";
+			String query = "delete from payments where pID =?";
 			
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			
@@ -189,7 +189,7 @@ public class Payment {
 			
 			String query = "UPDATE `payments` "
 					+ "SET `nic`=?,`cardno`=?,`amount`=?"
-					+ " WHERE `ID`= ?";
+					+ " WHERE `pID`= ?";
 			
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			
