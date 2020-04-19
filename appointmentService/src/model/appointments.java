@@ -10,6 +10,7 @@ public class appointments {
 	
 	
 	String output="";
+	
 	//connection
 	public Connection connect() {
 		Connection con = null;
@@ -69,7 +70,7 @@ public class appointments {
 	
 	
 	
-	
+	//View appointments
 	public String viewAppointments() {
 		String output = "";
 
@@ -134,7 +135,7 @@ public class appointments {
 	
 	
 	
-	
+	//update appointments
 	public String updateAppointment(String Aid, String date, String time , String doctorid, String 	patientnic ) {
 		String output = "";
 		try {
@@ -163,6 +164,7 @@ public class appointments {
 	}
 	
 	
+	//cancel appointments
 	public String cancelAppointments(String Aid) {
 		String output = "";
 
@@ -196,7 +198,7 @@ public class appointments {
 	
 	
 	
-	
+//search appointments	
 public String searchAppointments(String searchText) {
 		
 		System.out.println(searchText);
@@ -260,7 +262,7 @@ public String searchAppointments(String searchText) {
 	}
 
 
-
+//confirm appointments
 public String ConfirmAppointment(String Aid) {
 	String output = "";
 	String msg="Confirmed";
