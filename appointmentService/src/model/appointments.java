@@ -123,6 +123,18 @@ public class appointments {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String updateAppointment(String Aid, String date, String time , String doctorid, String 	patientnic ) {
 		String output = "";
 		try {

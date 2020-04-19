@@ -32,7 +32,7 @@ public class appointmetnsService {
 	appointments appointment = new appointments();
 	
 	
-	@RolesAllowed({ "admin","doctor"})
+	@RolesAllowed({ "admin","doctor","hospital"})
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -74,7 +74,7 @@ public class appointmetnsService {
 	
 	
 	//update appointment
-	@RolesAllowed("admin")
+	@RolesAllowed({ "admin","patient"})
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
