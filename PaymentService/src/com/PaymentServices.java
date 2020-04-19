@@ -99,6 +99,7 @@ public class PaymentServices {
 	
 	
 	/*
+	 *
 	@RolesAllowed("admin")
 	@GET
 	@Path("/searchPay/{nic}")
