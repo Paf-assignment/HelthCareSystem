@@ -20,7 +20,7 @@ public class Payment {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/helthcaresystem?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
-//  spring.datasource.url=jdbc:mysql://localhost:3301/student?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
 			// For Testing
 			System.out.println("Successfully Connected");
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class Payment {
 				return "Error while connecting to database";
 			}
 			
-			//ID`, `dName`, `dSpecialization`, `dAddress`, `dEmail`, `dFee`, `dWHospital
+			
 			output="<table class=\"table\" border =\"1\">"
 					+ "<tr><th>NIC</th><th>CardNo</th><th>Amount</th>"
 					+ "<th>Update</th><th>Remove</th></tr>";
