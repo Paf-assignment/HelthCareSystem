@@ -112,7 +112,7 @@ public class DoctorService {
 		return output;
 	}
 	
-	@RolesAllowed("admin")
+	@RolesAllowed({"admin","patient"})
 	@GET
 	@Path("/searchDoc/{dName}")
 	@Produces(MediaType.TEXT_PLAIN)

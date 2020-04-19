@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class appointments {
+	
+	
+	String output="";
 	//connection
 	public Connection connect() {
 		Connection con = null;
@@ -19,10 +22,6 @@ public class appointments {
 			e.printStackTrace();
 		}
 		return con;
-		
-		
-		
-	
 	}
 	
 	
@@ -82,8 +81,7 @@ public class appointments {
 
 			// Prepare the html table to be displayed
 			output = "<table  class=\"table\" border=\"1\"><tr><th>Appointment ID</th>"
-					+ "<th>date</th><th>Time</th>" + "<th>status</th><th>doctor</th><th>patientnic</th>"
-					+ "<th>Update</th><th>Remove</th></tr>";
+					+ "<th>date</th><th>Time</th>" + "<th>status</th><th>doctor</th><th>patientnic</th>"+ "<th>Update</th><th>Remove</th></tr>";
 			String query = "select * from appointment";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -179,6 +177,74 @@ public class appointments {
 
 		return output;
 
+	}
+	
+	
+	
+	
+	
+	
+	
+public String searchAppointments(String searchText) {
+		
+		System.out.println(searchText);
+		
+		try {
+			Connection con = connect();
+			
+			if(con == null) {
+			return "Erroe while connecting to the database";
+		}
+
+			output="<table class=\"table\" border =\"1\">"
+					+ "<tr><th>AID</th><th>Date</th><th>time</th><th>status</th><th>doctorid</th>paientNIC</th>"
+					+ "<th>Update</th><th>Remove</th></tr>";
+
+			String query = "SELECT * FROM appointment WHERE patientnic LIKE ?";
+			PreparedStatement prepareStatement = con.prepareStatement(query);
+			prepareStatement.setString(1,searchText);
+			
+			ResultSet set = prepareStatement.executeQuery();
+			
+			while (set.next()) {
+				
+				
+				String AID = Integer.toString(set.getInt("Aid"));
+				String Date = set.getString("date");
+				String time = set.getString("time");
+				String status = set.getString("checkeddStatus");
+				String doctorid = set.getString("doctorid");
+				String paientNIC = set.getString("patientnic");
+			
+				
+			
+				output += "<tr><th>" + AID +"</th>";
+				output += "<th>" + Date + "</th>";
+				output += "<th>" + time + "</th>";
+				output += "<th>" + status + "</th>";
+				output += "<th>" + doctorid + "</th>";
+				output += "<th>" + paientNIC + "</th>";
+				
+				output += "<td><input type=\"button\" name=\"btnUpdate\" value=\"update\"></td>"
+						+ "<td><form method=\"post\" action=\"doctor.jsp\">"
+						+ "<input name=\"btnRemove\" value=\"remove\" type=\"submit\">"
+						+ "<input name=\"id\" type=\"hidden\" value=\"" + AID + "\">" + "</form></td></tr>" ;
+			}
+			
+			con.close();
+			prepareStatement.close();
+
+			output += "</table>";
+			System.out.println("successfully print search data...");
+
+		} catch (Exception e) {
+
+			output = "Cannot read the data";
+			System.err.println(e.getMessage());
+				
+		}
+		return output;	
+		
 	}
 	
 	
